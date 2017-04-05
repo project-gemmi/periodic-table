@@ -1,0 +1,28 @@
+Protein Data Bank entries by elements
+A little utility made while testing the GEMMI library.
+
+Author: Marcin Wojdyr
+Copyright 2017 Global Phasing Ltd
+License: LGPLv3
+
+
+Update procedure
+================
+
+Update local copy of the mmCIF archive:
+
+  REMOTE=rsync.ebi.ac.uk::pub/databases/pdb/data/structures/divided
+  rsync -rlpt -v -z --delete $REMOTE/mmCIF/ /hdd/mmCIF
+
+When choosing examples we consult with the Top8000 list:
+  wget https://raw.githubusercontent.com/rlabduke/reference_data/master/Top8000/Top8000-SFbest_hom50_pdb_chain_list.csv
+
+Go through the mmCIF archive and write down elements from each entry:
+
+  ./make_elem_list.py /hdd/mmCIF/ > elems.txt
+
+Update data.js (the number is the max. PDB codes per one element set):
+
+  ./prepare_data_js.py elems.txt 30 > data.js
+
+Update "Last update:" in html.
