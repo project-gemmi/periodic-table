@@ -1,6 +1,8 @@
 Protein Data Bank entries by elements
 A little utility made while testing the GEMMI library.
 
+See: https://project-gemmi.github.io/periodic-table/
+
 Author: Marcin Wojdyr
 Copyright 2017 Global Phasing Ltd
 License: LGPLv3
@@ -21,8 +23,9 @@ Go through the mmCIF archive and write down elements from each entry:
 
   ./make_elem_list.py /hdd/mmCIF/ > elems.txt
 
-Update data.js (the number is the max. PDB codes per one element set):
+Update data.js (the number is the limit for number of PDB codes per one
+element set):
 
-  ./prepare_data_js.py elems.txt 30 > data.js
+  ./prepare_data_js.py elems.txt 15 > data.js
 
 Update "Last update:" in html.

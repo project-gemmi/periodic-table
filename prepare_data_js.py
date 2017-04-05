@@ -50,9 +50,9 @@ keys = sorted(ids_by_elems.keys(), key=lambda x: -len(ids_by_elems[x]))
 out.write('var ids_by_elems = {\n')
 for k in keys:
     codes = ids_by_elems[k]
+    # TODO: option to use the data list of codes as older data.js
     random.shuffle(codes)
     codes.sort(key=lambda x: 0 if x in top_codes else 1)
-    # todo sort by quality? random shuffle?
     cc = ','.join("'%s'" % c for c in codes[:entry_limit])
     out.write('%s:[%d,%s],\n' % (k, len(codes), cc))
 out.write('};\n')
