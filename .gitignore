@@ -1,2 +1,4 @@
 __pycache__/
 *.py[co]
+Top8000-SFbest_hom50_pdb_chain_list.csv
+elems.txt
