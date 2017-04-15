@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 import sys
-import gemmi as cif
+from gemmi import cif
 
 def main():
     for arg in sys.argv[1:]:
@@ -20,7 +20,7 @@ def find_elements(root, name):
   try:
     doc = cif.read_any(os.path.join(root, name))
     block = doc.sole_block()
-    elems = set(s for s in block.find_loop("_atom_site.type_symbol"))
+    elems = set(block.find_loop("_atom_site.type_symbol"))
     print(name + ' ' + ' '.join(elems))
   except Exception as e:
     print("Oops. %s" % e)
