@@ -19,7 +19,7 @@ elements = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na',
 top_list = 'Top8000-SFbest_hom50_pdb_chain_list.csv'
 top_codes = [line.split(',')[0] for line in open(top_list)][1:]
 
-indices = dict((el, n) for n, el in enumerate(elements))
+indices = {el: n for n, el in enumerate(elements)}
 
 input_file = sys.argv[1]
 entry_limit = int(sys.argv[2])
@@ -39,6 +39,18 @@ for line in open(input_file):
     code = sp[0][:4]
     ids_by_elems.setdefault(key, []).append(code)
 
+old_line_order = {}
+old_data = {}
+try:
+    with open('data.js') as old:
+        for n, line in enumerate(old):
+            if ':[' in line:
+                k, v =  line.split(':')
+                old_line_order[k] = n
+                old_data[k] = [c.strip("'") for c in v[:-3].split(',')[1:]]
+except IOError:
+    pass
+
 out = sys.stdout
 out.write('var elem_count = [')
 for n, el in enumerate(elements):
@@ -46,13 +58,16 @@ for n, el in enumerate(elements):
         out.write('\n ')
     out.write('%d,' % cnt.get(el.upper(), 0))
 out.write('\n];\n')
-keys = sorted(ids_by_elems.keys(), key=lambda x: -len(ids_by_elems[x]))
+keys = ids_by_elems.keys()
+keys.sort(key=lambda x: (-len(ids_by_elems[x]), old_line_order.get(x, 0)))
 out.write('var ids_by_elems = {\n')
 for k in keys:
     codes = ids_by_elems[k]
-    # TODO: option to use the data list of codes as older data.js
-    random.shuffle(codes)
-    codes.sort(key=lambda x: 0 if x in top_codes else 1)
+    if k in old_data and set(old_data[k]) == set(codes):
+        codes = old_data[k]
+    else:
+        random.shuffle(codes)
+        codes.sort(key=lambda x: 0 if x in top_codes else 1)
     cc = ','.join("'%s'" % c for c in codes[:entry_limit])
     out.write('%s:[%d,%s],\n' % (k, len(codes), cc))
 out.write('};\n')

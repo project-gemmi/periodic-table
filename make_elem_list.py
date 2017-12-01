@@ -18,7 +18,7 @@ def main():
 
 def find_elements(root, name):
   try:
-    doc = cif.read_any(os.path.join(root, name))
+    doc = cif.read(os.path.join(root, name))
     block = doc.sole_block()
     elems = set(block.find_loop("_atom_site.type_symbol"))
     print(name + ' ' + ' '.join(elems))
