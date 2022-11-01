@@ -251,9 +251,9 @@ var elements = ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na',
 'D', 'X'];
 
 //var PDB_LINK = 'https://www.ebi.ac.uk/pdbe/entry/pdb/';
-var PDB_LINK = 'https://www.rcsb.org/pdb/explore/explore.do?structureId=';
+var PDB_LINK = 'https://www.rcsb.org/structure/';
 function image_link(pdb_id) {
-  return 'https://www.rcsb.org/pdb/images/' + pdb_id + '_bio_r_250.jpg';
+  return 'https://cdn.rcsb.org/images/structures/' + pdb_id + '_model-1.jpeg';
 }
 
 function contains(key, names) {
@@ -306,8 +306,8 @@ function update() {
     }
   }
   desc.innerHTML = 'selected: ' + names.join(', ') +
-    '<br/>entries with it: ' + incl_count +
-    '<br/>entries with only it: ' + only_count;
+    '<br/>entries with all selected elements: ' + incl_count +
+    '<br/>with all selected elements and nothing else: ' + only_count;
   for (var i = 0; i < example_tds.length; i++) {
     setup_example(example_tds[i], example_codes[i]);
   }
