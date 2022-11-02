@@ -58,7 +58,7 @@ for n, el in enumerate(elements):
         out.write('\n ')
     out.write('%d,' % cnt.get(el.upper(), 0))
 out.write('\n];\n')
-keys = ids_by_elems.keys()
+keys = list(ids_by_elems.keys())
 keys.sort(key=lambda x: (-len(ids_by_elems[x]), old_line_order.get(x, 0)))
 out.write('var ids_by_elems = {\n')
 for k in keys:
