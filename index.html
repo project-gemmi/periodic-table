@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <!--
 TODO:
-- print total number of PDB entries (footnote or next to "Select elements...")
 - periodic table
-    - better (gradual) coloring of elements
-    - elements D and X
+    - a continuous color scale for the elements
 - examples:
     - list of extra element in each example
     - link titles with the PDB title
@@ -41,7 +39,7 @@ h2 span.on { border-style: inset; text-shadow: 1px 1px 0 #444; }
 #periodic tr td.sel { border-style: inset; text-shadow: 1px 1px 1px #222; }
 #periodic tr td.sel sup::before { content: '\25CF'; color: #0f0; font-size: 8px;
                                   position: absolute; top: -1px; left: 1px; }
-#desc { padding: 0 30px; color: #555; }
+#desc { padding: 0 30px; color: #333; }
 #examples { margin: 0 auto; }
 #examples tr td { background-color: #fff; width: 167px; height: 167px;
                   font-size: 48px; color: #aaa; text-align: center;
@@ -56,7 +54,9 @@ table.hide_optional tr.optional { display: none; }
  <table id="periodic">
   <tr id="p1">
    <td id="H" title="Hydrogen"><sup>1</sup>H</td>
-   <td class="empty" colspan="16"></td>
+   <td id="D" title="Deuterium"><sup>1</sup>D</td>
+   <td class="empty" colspan="14"></td>
+   <td id="X" title="Unknown"><sup>?</sup>X</td>
    <td id="He" title="Helium"><sup>2</sup>He</td>
   </tr>
   <tr id="p2">
